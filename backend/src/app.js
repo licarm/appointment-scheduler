@@ -18,6 +18,7 @@ app.get('/users', async (req, res) => {
       SELECT * FROM myschema.user ${type && `WHERE user_type = '${type}'`};
     `);
     res.status(200).json(result.rows);
+    console.log('get users resolve')
   } catch (e) {
     console.error(1111, e);
     res.status(500).send("Internal Server Error");
@@ -25,6 +26,33 @@ app.get('/users', async (req, res) => {
   return res;
 });
 
+app.get('/openings', async (req,res) => {
+  try {
+    const userId = req.query.userId;
+
+    const result = await query(`
+      SELECT * FROM myschema.opening ${userId && `WHERE user_coach_id = '${userId}'`};
+    `);
+    res.status(200).json(result.rows);
+  } catch (e) {
+    console.error(1111, e);
+    res.status(500).send("Internal Server Error");
+  }
+  return res;
+});
+
+// app.post('/openings', async (req, res) => {
+//   try {
+//     const body = req.body;
+//     await query(`
+//     INSERT INTO myschema.opening VALUES (${body.coachId}, ${body.time}) 
+//     WHERE NOT EXISTS (
+//       SELECT time FROM myschema.opening 
+//         WHERE user_coach_id = ${body.coachId}
+//     )
+//     `)
+//   }
+// });
 
 
 app.listen(8080, async () => {
