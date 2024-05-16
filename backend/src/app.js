@@ -10,6 +10,21 @@ app.get('/', (req, res) => {
   // await query();
 });
 
+app.get('/users', async (req, res) => {
+  try {
+    const type = req.query.type;
+
+    const result = await query(`
+      SELECT * FROM myschema.user ${type && `WHERE user_type = '${type}'`};
+    `);
+    res.status(200).json(result.rows);
+  } catch (e) {
+    console.error(1111, e);
+    res.status(500).send("Internal Server Error");
+  }
+  return res;
+});
+
 
 
 app.listen(8080, async () => {
