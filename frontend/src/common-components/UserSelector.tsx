@@ -1,7 +1,5 @@
 import { MenuItem, Select, styled } from "@mui/material";
-import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { UserContext } from "src/utils/UserContext";
 import { User } from "src/Types";
 
 const UserSelector = ({currentUser, setCurrentUser}: {currentUser?: User, setCurrentUser: any}) => {
@@ -55,11 +53,5 @@ const StyledSelect = styled(Select)`
   color: white;
   height: 100px;
 `;
-
-const useSetCurrentUser = (user: User) => {
-  useEffect(() => {
-
-  }, [user]);
-}
 
 export default UserSelector;

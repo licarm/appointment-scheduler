@@ -1,5 +1,4 @@
 import { Dayjs } from 'dayjs';
-import timezone from 'dayjs/plugin/timezone';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "src/utils/UserContext";
 import createOpening from 'src/actions/createOpening';
@@ -35,8 +34,6 @@ const CoachPage = () => {
 
     fetchOpenings();
   }, []);
-
-  console.log(`http://localhost:8080/openings${user ? '?coachId=' + user.id : ''}`, openings)
 
   return (
     <>

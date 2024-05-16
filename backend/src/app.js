@@ -9,7 +9,6 @@ app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('basic get is working');
-  // await query();
 });
 
 app.get('/users', async (req, res) => {
@@ -63,7 +62,6 @@ app.post('/openings', async (req, res) => {
 
 app.listen(8080, async () => {
   console.log('server listening on port 8080')
-  // console.log(await query("SET SCHEMA TO myschema;"));
 });
 
 
