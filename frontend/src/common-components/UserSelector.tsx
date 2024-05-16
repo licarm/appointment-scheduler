@@ -1,12 +1,11 @@
 import { MenuItem, Select, styled } from "@mui/material";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
-import { UserContext } from "src/UserContext";
-import { User } from "src/UserTypes";
+import { UserContext } from "src/utils/UserContext";
+import { User } from "src/Types";
 
-const UserSelector = () => {
+const UserSelector = ({currentUser, setCurrentUser}: {currentUser?: User, setCurrentUser: any}) => {
   const [users, setUsers] = useState<User[]>([]);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -24,10 +23,9 @@ const UserSelector = () => {
 
     fetchUsers();
   }, []);
-console.log(dayjs())
+
   return (
     <>
-      <UserContext.Provider value={currentUser}>
         <StyledSelect
           labelId='select-user'
           label={'Name'}
@@ -49,7 +47,6 @@ console.log(dayjs())
             })
           }
         </StyledSelect>
-      </UserContext.Provider>
     </>
   )
 };
@@ -57,6 +54,12 @@ console.log(dayjs())
 const StyledSelect = styled(Select)`
   color: white;
   height: 100px;
-`
+`;
+
+const useSetCurrentUser = (user: User) => {
+  useEffect(() => {
+
+  }, [user]);
+}
 
 export default UserSelector;
