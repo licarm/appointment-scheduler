@@ -4,6 +4,8 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
+app.use(express.json());
+
 
 app.get('/', (req, res) => {
   res.send('basic get is working');
@@ -28,7 +30,7 @@ app.get('/users', async (req, res) => {
 
 app.get('/openings', async (req,res) => {
   try {
-    const userId = req.query.userId;
+    const userId = req.query.coachId;
 
     const result = await query(`
       SELECT * FROM myschema.opening ${userId && `WHERE user_coach_id = '${userId}'`};
@@ -41,18 +43,22 @@ app.get('/openings', async (req,res) => {
   return res;
 });
 
-// app.post('/openings', async (req, res) => {
-//   try {
-//     const body = req.body;
-//     await query(`
-//     INSERT INTO myschema.opening VALUES (${body.coachId}, ${body.time}) 
-//     WHERE NOT EXISTS (
-//       SELECT time FROM myschema.opening 
-//         WHERE user_coach_id = ${body.coachId}
-//     )
-//     `)
-//   }
-// });
+app.post('/openings', async (req, res) => {
+  try {
+    const body = req.body;
+
+    const result = await query(`
+    INSERT INTO myschema.opening(user_coach_id, time) VALUES ('${body.coachId}', '${body.time}') 
+    ;`)
+    res.status(200).json(result);
+    
+  } catch (e) {
+    console.error(1111, e);
+    res.status(500).send("Internal Server Error");
+  }
+  return res;
+
+});
 
 
 app.listen(8080, async () => {
