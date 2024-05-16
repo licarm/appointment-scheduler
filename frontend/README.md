@@ -24,3 +24,6 @@ $ npm start
 ### Assumptions
 1. A coach's schedule availabilities can not be joined. A booking can not overlap two different slots.
 2. An call can only be booked on the even hours from 8-4pm. So there are 4 time slots per day.
+
+### Working parts
+Coaches can add available slots
