@@ -2,7 +2,7 @@ import { Dayjs } from "dayjs";
 
 const createOpening = async (coachId: string, time: Dayjs) => {
   if (coachId === '') return false;
-  console.log(2, coachId, time)
+
   let res;
   try{
 
