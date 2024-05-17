@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User } from "src/Types";
+import { User } from "src/utils/Types";
 
 const useFetchOpenings = (user?: User): any[] => {
   const [openings, setOpenings] = useState<any[]>([]);

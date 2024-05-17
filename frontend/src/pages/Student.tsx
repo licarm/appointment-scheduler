@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Opening } from "src/Types";
+import { Opening } from "src/utils/Types";
 import TimeSlot, { SlotContainer } from "src/common-components/TimeSlot";
 import useFetchOpenings from "src/hooks/useFetchOpenings";
 import { UserContext } from "src/utils/UserContext";

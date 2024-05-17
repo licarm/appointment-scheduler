@@ -5,7 +5,7 @@ import createOpening from 'src/actions/createOpening';
 import CalendarMonth from "src/common-components/CalendarMonth";
 import TimeSlot, { SlotContainer } from "src/common-components/TimeSlot";
 import { dayjs } from 'src/utils/timezone';
-import { Opening } from 'src/Types';
+import { Opening } from 'src/utils/Types';
 import { styled } from 'styled-components';
 import useFetchOpenings from 'src/hooks/useFetchOpenings';
 
@@ -19,7 +19,6 @@ const slots = (date: Dayjs) => [
 
 const CoachPage = () => {
   const [date, setDate] = useState(dayjs());
-  // const [openings, setOpenings] = useState([]);
 
   const user = useContext(UserContext);
   const openings = useFetchOpenings(user);

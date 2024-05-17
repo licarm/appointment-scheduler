@@ -1,6 +1,6 @@
 import { MenuItem, Select, styled } from "@mui/material";
 import { useEffect, useState } from "react";
-import { User } from "src/Types";
+import { User } from "src/utils/Types";
 
 const UserSelector = ({ userType = 'coach', currentUser, setCurrentUser }: { 
   userType: string,

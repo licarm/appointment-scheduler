@@ -4,7 +4,7 @@ import UserSelector from 'src/common-components/UserSelector';
 import CoachPage from 'src/pages/Coach';
 import StudentPage from 'src/pages/Student';
 import { UserContext } from 'src/utils/UserContext';
-import { User } from 'src/Types';
+import { User } from 'src/utils/Types';
 
 
 function App() {
