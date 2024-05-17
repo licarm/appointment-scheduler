@@ -36,7 +36,6 @@ const UserSelector = ({ userType = 'coach', currentUser, setCurrentUser }: {
         {/* <MenuItem value='123' key='default'>123</MenuItem> */}
         {
           users.map((user, idx) => {
-            console.log(userType)
             if (userType.includes(user.user_type)) {
               return (
                 <MenuItem
@@ -49,6 +48,7 @@ const UserSelector = ({ userType = 'coach', currentUser, setCurrentUser }: {
                 >{user.name}</MenuItem>
               )
             }
+            return <></>;
           })
         }
       </StyledSelect>
