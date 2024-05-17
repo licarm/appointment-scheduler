@@ -5,6 +5,8 @@ import createOpening from 'src/actions/createOpening';
 import CalendarMonth from "src/common-components/CalendarMonth";
 import TimeSlot from "src/common-components/TimeSlot";
 import { dayjs } from 'src/utils/timezone';
+import { Opening } from 'src/Types';
+import { styled } from 'styled-components';
 
 
 const slots = (date: Dayjs) => [
@@ -38,29 +40,67 @@ const CoachPage = () => {
   return (
     <>
       {user?.name || 'missing user'}'s page
-      <CalendarMonth onChange={(val) => setDate(val)} />
-      {
-        slots(date).map((slot) => {
-          return (
-            <TimeSlot
-              key={slot.toString()}
-              onClick={async () => {
-                console.log(1)
-                const result = await createOpening(user?.id || '', slot);
+      <CoachPageContainer>
+        <div>
+          Here are the slots you've already added.
+          <SlotContainer>
+            {openings.map((o: Opening) => {
+              return <TimeSlot status="slot">{o.time}</TimeSlot>
+            })}
+          </SlotContainer>
+          {/* Here are your upcoming appointments. */}
+        </div>
+        <div>
+          Click a time to add a 2 hour slot!
+          <CalendarMonth onChange={(val) => setDate(val)} />
+          {
+            slots(date).map((slot) => {
+              const openingExists = openings.find((o: Opening) => {
+                // console.log(slot, o, o.user_coach_id === user?.id)
+                // console.log(o.user_coach_id, user?.id, o.user_coach_id === user?.id)
 
-                if (result) {
-                  alert('Yay! A slot was added on ' + slot.toString());
-                } else {
-                  alert('Whoops! Something went wrong.')
-                }
-              }}>
-              {slot.format('hh:mm').toString()}
-            </TimeSlot>
-          );
-        })
-      }
+                return slot.isSame(o.time) && o.user_coach_id === user?.id
+              });
+              if (openingExists) {
+                return <></>;
+              }
+
+              return (
+                <TimeSlot
+                  status="open"
+                  key={slot.toString()}
+                  onClick={async () => {
+                    const result = await createOpening(user?.id || '', slot);
+
+                    if (result) {
+                      alert('Yay! A slot was added on ' + slot.toString());
+                    } else {
+                      alert('Whoops! Something went wrong.')
+                    }
+                  }}>
+                  {slot.format('hh:mm').toString()}
+                </TimeSlot>
+              );
+            })
+          }
+        </div>
+      </CoachPageContainer>
+
     </>
   )
 };
+
+const CoachPageContainer = styled.div`
+display: flex;
+flex-direction: row;
+gap: 40px;
+`;
+
+const SlotContainer = styled.div`
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 250px;
+`;
 
 export default CoachPage;

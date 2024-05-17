@@ -7,7 +7,7 @@ export interface User {
 
 export interface Opening {
   id: string,
-  coachId: string,
+  user_coach_id: string,
   time: string,
 }
 
