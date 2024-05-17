@@ -28,6 +28,6 @@ $ npm start
 2. An call can only be booked on the even hours from 8-4pm. So there are 4 time slots per day.
 
 ### Working parts
-Coaches can add available slots
-Coaches can see available slots
-Student can see available slots
+1. Coaches can add available slots
+2. Coaches can see available slots
+3. Student can see available slots
