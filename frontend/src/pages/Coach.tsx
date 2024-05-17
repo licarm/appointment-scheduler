@@ -7,6 +7,7 @@ import TimeSlot from "src/common-components/TimeSlot";
 import { dayjs } from 'src/utils/timezone';
 import { Opening } from 'src/Types';
 import { styled } from 'styled-components';
+import useFetchOpenings from 'src/hooks/useFetchOpenings';
 
 
 const slots = (date: Dayjs) => [
@@ -18,34 +19,20 @@ const slots = (date: Dayjs) => [
 
 const CoachPage = () => {
   const [date, setDate] = useState(dayjs());
-  const [openings, setOpenings] = useState([]);
+  // const [openings, setOpenings] = useState([]);
 
   const user = useContext(UserContext);
+  const openings = useFetchOpenings(user);
 
-  useEffect(() => {
-    const fetchOpenings = async () => {
-      let data
-      try {
-        let res = await fetch(`http://localhost:8080/openings${user ? `?coachId=${user.id}` : ''}`);
-        data = await res.json();
-      } catch (e) {
-        console.log(e);
-      }
-      setOpenings(data);
-    }
-
-    fetchOpenings();
-  }, []);
-
-  return (
-    <>
-      {user?.name || 'missing user'}'s page
+  return (user 
+    ? <>
+      {user.name}'s page
       <CoachPageContainer>
         <div>
           Here are the slots you've already added.
           <SlotContainer>
             {openings.map((o: Opening) => {
-              return <TimeSlot status="slot">{o.time}</TimeSlot>
+              return <TimeSlot key={o.time} status="slot">{o.time}</TimeSlot>
             })}
           </SlotContainer>
           {/* Here are your upcoming appointments. */}
@@ -56,10 +43,8 @@ const CoachPage = () => {
           {
             slots(date).map((slot) => {
               const openingExists = openings.find((o: Opening) => {
-                // console.log(slot, o, o.user_coach_id === user?.id)
-                // console.log(o.user_coach_id, user?.id, o.user_coach_id === user?.id)
 
-                return slot.isSame(o.time) && o.user_coach_id === user?.id
+                return slot.isSame(o.time) && o.user_coach_id === user.id
               });
               if (openingExists) {
                 return <></>;
@@ -70,7 +55,7 @@ const CoachPage = () => {
                   status="open"
                   key={slot.toString()}
                   onClick={async () => {
-                    const result = await createOpening(user?.id || '', slot);
+                    const result = await createOpening(user.id, slot);
 
                     if (result) {
                       alert('Yay! A slot was added on ' + slot.toString());
@@ -87,6 +72,7 @@ const CoachPage = () => {
       </CoachPageContainer>
 
     </>
+    : <>missing user</>
   )
 };
 
