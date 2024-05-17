@@ -2,7 +2,7 @@ export interface User {
   name: string,
   phoneNumber: string,
   id: string,
-  userType: string,
+  user_type: string,
 }
 
 export interface Opening {
