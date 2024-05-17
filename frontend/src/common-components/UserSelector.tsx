@@ -2,7 +2,11 @@ import { MenuItem, Select, styled } from "@mui/material";
 import { useEffect, useState } from "react";
 import { User } from "src/Types";
 
-const UserSelector = ({currentUser, setCurrentUser}: {currentUser?: User, setCurrentUser: any}) => {
+const UserSelector = ({ userType = 'coach', currentUser, setCurrentUser }: { 
+  userType: string,
+  currentUser?: User, 
+  setCurrentUser: any 
+}) => {
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
@@ -24,14 +28,16 @@ const UserSelector = ({currentUser, setCurrentUser}: {currentUser?: User, setCur
 
   return (
     <>
-        <StyledSelect
-          labelId='select-user'
-          label={'Name'}
-          value={currentUser?.name || ''}
-        >
-          <MenuItem value='123' key='default'>123</MenuItem>
-          {
-            users.map((user, idx) => {
+      <StyledSelect
+        labelId='select-user'
+        label={'Name'}
+        value={currentUser?.name || ''}
+      >
+        {/* <MenuItem value='123' key='default'>123</MenuItem> */}
+        {
+          users.map((user, idx) => {
+            console.log(userType)
+            if (userType.includes(user.user_type)) {
               return (
                 <MenuItem
                   value={user.name}
@@ -42,9 +48,10 @@ const UserSelector = ({currentUser, setCurrentUser}: {currentUser?: User, setCur
                   }}
                 >{user.name}</MenuItem>
               )
-            })
-          }
-        </StyledSelect>
+            }
+          })
+        }
+      </StyledSelect>
     </>
   )
 };

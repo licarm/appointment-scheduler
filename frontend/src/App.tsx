@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={currentUser}>
-        <UserSelector currentUser={currentUser} setCurrentUser={setCurrentUser} />
+        <UserSelector userType={path} currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <header className="App-header">
           {path === '/coach'
             ? <CoachPage />
