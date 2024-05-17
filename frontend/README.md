@@ -1,6 +1,7 @@
 # appointment-scheduler
 
 ### Set up database 
+In the frontend directory, 
 1. Start postgres
 ```bash
 $ brew services start postgresql
@@ -17,6 +18,7 @@ $ npm run db:setup
 ```
 
 ### Run app
+In the frontend and backend directory, run
 ```bash
 $ npm start
 ```
@@ -27,3 +29,5 @@ $ npm start
 
 ### Working parts
 Coaches can add available slots
+Coaches can see available slots
+Student can see available slots
