@@ -48,7 +48,7 @@ const UserSelector = ({ userType = 'coach', currentUser, setCurrentUser }: {
                 >{user.name}</MenuItem>
               )
             }
-            return <></>;
+            return;
           })
         }
       </StyledSelect>

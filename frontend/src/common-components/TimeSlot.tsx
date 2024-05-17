@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { ReactNode } from "react";
+import styled from "styled-components";
 
 const TimeSlot = ({ status = 'open', children, onClick }: {
   status: "slot" | "booked" | "open",
@@ -37,5 +38,12 @@ const TimeSlot = ({ status = 'open', children, onClick }: {
 
   )
 };
+
+export const SlotContainer = styled.div`
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 250px;
+`;
 
 export default TimeSlot;

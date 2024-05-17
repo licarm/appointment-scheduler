@@ -1,9 +1,9 @@
 import { Dayjs } from 'dayjs';
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "src/utils/UserContext";
 import createOpening from 'src/actions/createOpening';
 import CalendarMonth from "src/common-components/CalendarMonth";
-import TimeSlot from "src/common-components/TimeSlot";
+import TimeSlot, { SlotContainer } from "src/common-components/TimeSlot";
 import { dayjs } from 'src/utils/timezone';
 import { Opening } from 'src/Types';
 import { styled } from 'styled-components';
@@ -72,7 +72,7 @@ const CoachPage = () => {
       </CoachPageContainer>
 
     </>
-    : <>missing user</>
+    : <>select a user</>
   )
 };
 
@@ -80,13 +80,6 @@ const CoachPageContainer = styled.div`
 display: flex;
 flex-direction: row;
 gap: 40px;
-`;
-
-const SlotContainer = styled.div`
-display: flex;
-flex-direction: column;
-gap: 10px;
-width: 250px;
 `;
 
 export default CoachPage;

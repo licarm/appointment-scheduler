@@ -3,7 +3,6 @@ import { User } from "src/Types";
 
 const useFetchOpenings = (user?: User): any[] => {
   const [openings, setOpenings] = useState<any[]>([]);
-  // let openings: any[] = [];
 
   useEffect(() => {
     const fetchOpenings = async () => {
@@ -19,8 +18,6 @@ const useFetchOpenings = (user?: User): any[] => {
 
     fetchOpenings();
   }, [user, openings]);
-
-  console.log(user?.name, openings)
 
   return openings;
 };
